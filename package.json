@@ -1,38 +1,52 @@
 {
-  "name": "mv-dtx-testbed",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+   "name": "mv-dtx-testbed",
+   "version": "0.1.0",
+   "private": true,
+   "dependencies": {
+      "@testing-library/jest-dom": "^5.17.0",
+      "@testing-library/react": "^13.4.0",
+      "@testing-library/user-event": "^13.5.0",
+      "apexcharts": "^3.42.0",
+      "axios": "^1.4.0",
+      "http-proxy-middleware": "^2.0.6",
+      "lodash": "^4.17.21",
+      "moment": "^2.29.4",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-kakao-maps-sdk": "^1.1.11",
+      "react-query": "^3.39.3",
+      "react-router-dom": "^6.15.0",
+      "react-scripts": "5.0.1",
+      "recharts": "^2.8.0",
+      "recoil": "^0.7.7",
+      "sass": "^1.66.1",
+      "styled-components": "^6.0.7",
+      "swiper": "^10.2.0",
+      "web-vitals": "^2.1.4"
+   },
+   "scripts": {
+      "start": "PORT=3000 react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "deploy": "scp -r -i /Users/yoon/utils/keys/pem/DTX_IOT.pem /Users/yoon/Sites/React/mv-projects/2023/mv-dtx-testbed/build/* ubuntu@ec2-3-38-182-232.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/build"
+   },
+   "eslintConfig": {
+      "extends": [
+         "react-app",
+         "react-app/jest"
+      ]
+   },
+   "browserslist": {
+      "production": [
+         ">0.2%",
+         "not dead",
+         "not op_mini all"
+      ],
+      "development": [
+         "last 1 chrome version",
+         "last 1 firefox version",
+         "last 1 safari version"
+      ]
+   }
 }

@@ -1,0 +1,316 @@
+@charset "utf-8";
+
+//Pretendard
+@font-face {
+   font-family: "Pretendard";
+   font-style: normal;
+   font-weight: 100;
+   src: url("./assets/fonts/eot/Pretendard-Light.eot");
+   src: url("./assets/fonts/woff/Pretendard-Light.woff") format("woff"),
+      url("./assets/fonts/eot/Pretendard-Light.eot?#iefix") format("embedded-opentype");
+}
+
+@font-face {
+   font-family: "Pretendard";
+   font-style: normal;
+   font-weight: 200;
+   src: url("./assets/fonts/eot/Pretendard-Regular.eot");
+   src: url("./assets/fonts/woff/Pretendard-Regular.woff") format("woff"),
+      url("./assets/fonts/eot/Pretendard-Regular.eot?#iefix") format("embedded-opentype");
+}
+
+@font-face {
+   font-family: "Pretendard";
+   font-style: normal;
+   font-weight: 300;
+   src: url("./assets/fonts/eot/Pretendard-Medium.eot");
+   src: url("./assets/fonts/woff/Pretendard-Medium.woff") format("woff"),
+      url("./assets/fonts/eot/Pretendard-Medium.eot?#iefix") format("embedded-opentype");
+}
+
+@font-face {
+   font-family: "Pretendard";
+   font-style: normal;
+   font-weight: 400;
+   src: url("./assets/fonts/eot/Pretendard-SemiBold.eot");
+   src: url("./assets/fonts/woff/Pretendard-SemiBold.woff") format("woff"),
+      url("./assets/fonts/eot/Pretendard-SemiBold.eot?#iefix") format("embedded-opentype");
+}
+
+@font-face {
+   font-family: "Pretendard";
+   font-style: normal;
+   font-weight: 500;
+   src: url("./assets/fonts/eot/Pretendard-Bold.eot");
+   src: url("./assets/fonts/woff/Pretendard-Bold.woff") format("woff"),
+      url("./assets/fonts/eot/Pretendard-Bold.eot?#iefix") format("embedded-opentype");
+}
+
+/* reset */
+html,
+body,
+div,
+span,
+object,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+a,
+button,
+abbr,
+address,
+img,
+q,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+footer,
+header,
+section,
+summary {
+   margin: 0;
+   padding: 0;
+   border: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+   display: block;
+} /* HTML5 display-role reset for older browsers */
+body,
+html {
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   margin: 0;
+   padding: 0;
+}
+ol,
+ul {
+   list-style: none;
+}
+table {
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+img {
+   border: none;
+}
+a {
+   text-decoration: none;
+   color: inherit;
+}
+address {
+   font-style: normal;
+}
+button {
+   display: inline-block;
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
+}
+input,
+button,
+a,
+select,
+option {
+   font-size: inherit;
+}
+input[type="checkbox"] {
+   border: none !important;
+} /* for lte IE10 */
+input[type="radio"] {
+   border: none !important;
+} /* for lte IE10 */
+input[type="text"]::-ms-clear {
+   display: none;
+}
+caption,
+hr {
+   display: none;
+}
+pre {
+   word-break: break-all;
+   white-space: pre-line;
+}
+li {
+   list-style: none;
+}
+input,
+select {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+/* common */
+body,
+html {
+   width: 100%;
+   min-height: 100%;
+   //  font-family: "Pretendard", "맑은 고딕", "Malgun Gothic", Dotum, sans-serif;
+   font-size: 10px; // 10px = 1rem 단위로 사용하기 위해서 설정
+   letter-spacing: -0.0078rem !important;
+   color: #333;
+   background: #fff;
+}
+* {
+   font-family: "Pretendard", "맑은 고딕", "Malgun Gothic", Dotum, sans-serif;
+   font-size: 1.4rem; // 기본 글자 폰트 설정 - 14px
+   font-weight: 200;
+}
+
+b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+   font-weight: normal;
+}
+
+#root {
+   height: 100%;
+}
+// Pages 공통 사용
+#page {
+   width: 100%;
+   height: calc(100% - 65px); // 헤더영역 제외
+
+   background-color: #191e32;
+}
+
+/* 스크롤테마 */
+.cScroll {
+   overflow-y: auto;
+   overflow-x: hidden;
+   scrollbar-width: thin;
+   scrollbar-color: #303030 transparent;
+   scrollbar-arrow-color: #fff;
+   scrollbar-3dlight-color: #fff;
+   scrollbar-darkshadow-color: #fff;
+   scrollbar-face-color: #303030;
+   scrollbar-hightlight-color: #fff;
+   scrollbar-shadow-color: #fff;
+   scrollbar-track-color: #fff;
+   scrollbar-base-color: #efefef;
+   &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+   } //스크롤바 두께
+   &::-webkit-scrollbar-button {
+      display: none;
+   } //위 아래버튼
+   &::-webkit-scrollbar-track {
+      background-color: #323a56;
+      border-radius: 10px;
+   } // 스크롤 뒷배경색
+   &::-webkit-scrollbar-thumb {
+      background: #4e5d8f;
+      border-radius: 10px;
+   } // 스크롤바
+   &::-webkit-scrollbar-thumb:hover {
+   } // 스크롤바 마우스오버 색
+   &::-webkit-scrollbar-thumb:active {
+      background: #3c4b7e;
+   } // 스크롤바 누르고있을 때 색
+   &.cScrollX {
+      overflow-y: hidden;
+      overflow-x: scroll;
+      .innerScroll {
+         width: auto;
+      }
+   }
+   &.cScrollXY {
+      overflow-y: scroll;
+      overflow-x: scroll;
+   }
+}
+
+.clearFix:after {
+   content: "";
+   display: block;
+   clear: both;
+}
+.hidden {
+   display: block;
+   margin: 0;
+   padding: 0;
+   width: 0;
+   height: 0;
+   overflow: hidden;
+   font-size: 0;
+   line-height: 0;
+   visibility: hidden;
+}
+.txt-center {
+   text-align: center;
+}
+.pos-r {
+   position: relative;
+}
+.va-t {
+   vertical-align: top;
+}
+
+// 드래그 막기
+.noDrag {
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+// flex 속성
+.flex {
+   display: flex;
+}
+.dir_column {
+   flex-direction: column;
+}
+.ai_center {
+   align-items: center;
+}
+.jc_center {
+   justify-content: center;
+}
+.jc_between {
+   justify-content: space-between;
+}
+.jc_around {
+   justify-content: space-around;
+}
+.jc_evenly {
+   justify-content: space-evenly;
+}
