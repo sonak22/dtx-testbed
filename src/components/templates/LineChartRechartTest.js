@@ -200,7 +200,7 @@ function LineChartRechartTest({ title = "차트 제목", type }) {
       setList(newArr);
    };
 
-   console.log(smartPipeList);
+   // console.log(smartPipeList);
 
    return (
       <>
