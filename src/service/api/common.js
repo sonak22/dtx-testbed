@@ -31,6 +31,23 @@ export const logoutFetch = () => {
    // window.location.reload();
 };
 
+/* (이상감지)알림 조회 */
+export const getSensorNoti = async (params) => {
+   const { siteId } = params;
+
+   const { data } = await request.get(`/sensor/${siteId}/anomaly`, { params: null });
+
+   return data.datas;
+};
+
+export const postSensorNotiSingle = async (params) => {
+   const { siteId, notiId } = params;
+
+   const { data } = await request.post(`/sensor/${siteId}/anomaly/${notiId}`, null);
+
+   return data.datas;
+};
+
 /* 지도 조회 */
 export const getSiteMap = async (params) => {
    const { siteId } = params;

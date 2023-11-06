@@ -18,6 +18,7 @@ const queryClient = new QueryClient({
       queries: {
          // staleTime: 0, // fresh 유지 시간 - 해당시간내에는 refetch 조건이어도 refetch 안일어남(캐시 효과)
          // cacheTime: 0, // unMount 이후 쿼리 inactive 시간체크, GC 로 넘어가는 시간 (캐시에서 삭제)
+
          refetchOnMount: true, // 새로운 화면(컴포넌트)일때
          refetchOnReconnect: false,
          refetchOnWindowFocus: false,

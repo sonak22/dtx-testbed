@@ -4,7 +4,11 @@ import styled from "styled-components";
 import Logo1 from "assets/images/header/logo.png";
 import Logo2 from "assets/images/header/logo2.png";
 import IcoUser from "assets/images/header/ico-user-logout-line.svg";
-import { logoutFetch } from "service/api/common";
+import IcoBell from "assets/images/header/ico-bell.svg";
+import { getSensorNoti, logoutFetch } from "service/api/common";
+import NotiArea from "components/templates/NotiArea";
+import useQueryState from "hooks/my-react-query/useQueryState";
+import { QueryKeys } from "hooks/my-react-query/QueryKeys";
 
 export const HeaderStyle = {
    Wrap: styled.header`
@@ -38,6 +42,11 @@ export const HeaderStyle = {
       left:50%;
       transform: translate(-50%, -50%);
 
+   `,
+   BtnWrap: styled.div`
+      display : flex;
+      align-items: center;
+      gap:24px;
    `,
    UserBtnWrap: styled.div`
        position: relative;
@@ -139,41 +148,77 @@ export const HeaderStyle = {
          }
       }
    `,
+   NotiWrap: styled.div`
+      width: 28px;
+      height: 28px;
+      background: url(${IcoBell}) no-repeat center;
+      cursor: pointer;
+      &.active{
+         position: relative;
+         &::before{
+            position: absolute;
+            top: -5px;
+            right:-5px;
+            content:'';
+            width: 10px;
+            height: 10px;
+            background-color: #ea4946;
+            border: 4px solid #191e32;
+            border-radius: 50%;
+         }
+      }
+   `,
 };
 
 function Header(props) {
+   const [openNoti, setOpenNoti] = useState(false);
    const [userActive, setUserActive] = useState(false);
 
-   // 로그아웃
+   const siteId = JSON.parse(sessionStorage.getItem("userInfo"))?.siteId;
+   // React Query
+   const { data: notiData } = useQueryState(QueryKeys.getNoti(siteId), () => getSensorNoti({ siteId }), {
+      refetchInterval: 1000 * 60, // 1분마다 재요청
+   }); // 이상감지 알림 조회
+
+   const isNotiActive = notiData?.some((ele) => ele.isChecked === 0); //읽지 않은 알림 유무 체크
+
+   // 로그아웃 클릭
    const onClickLogout = () => {
       logoutFetch();
    };
 
    return (
-      <HeaderStyle.Wrap>
-         <HeaderStyle.Inner>
-            <HeaderStyle.LogoWrap>
-               <img src={Logo1} alt={"DTX"} />
-               <img src={Logo2} alt={"DTX"} />
-            </HeaderStyle.LogoWrap>
+      <>
+         {openNoti && <NotiArea setOpenNoti={setOpenNoti} notiData={notiData} />}
+         <HeaderStyle.Wrap>
+            <HeaderStyle.Inner>
+               <HeaderStyle.LogoWrap>
+                  <img src={Logo1} alt={"DTX"} />
+                  <img src={Logo2} alt={"DTX"} />
+               </HeaderStyle.LogoWrap>
 
-            <HeaderStyle.Title>지하시설물 안전관리</HeaderStyle.Title>
+               <HeaderStyle.Title>지하시설물 안전관리</HeaderStyle.Title>
 
-            {/* 유저 아이콘 - 메뉴 목록 포함(로그아웃) */}
-            <HeaderStyle.UserBtnWrap className={` ${userActive ? "active" : ""}`}>
-               <div
-                  className={"btnLogout"}
-                  onClick={() => {
-                     setUserActive(!userActive);
-                  }}
-               ></div>
+               <HeaderStyle.BtnWrap>
+                  {/* 알림 아이콘 */}
+                  <HeaderStyle.NotiWrap className={`${isNotiActive && "active"}`} onClick={() => setOpenNoti(!openNoti)}></HeaderStyle.NotiWrap>
+                  {/* 유저 아이콘 - 메뉴 목록 포함(로그아웃) */}
+                  <HeaderStyle.UserBtnWrap className={` ${userActive ? "active" : ""}`}>
+                     <div
+                        className={"btnLogout"}
+                        onClick={() => {
+                           setUserActive(!userActive);
+                        }}
+                     ></div>
 
-               <ul className="btnUserList">
-                  <li onClick={onClickLogout}>로그아웃</li>
-               </ul>
-            </HeaderStyle.UserBtnWrap>
-         </HeaderStyle.Inner>
-      </HeaderStyle.Wrap>
+                     <ul className="btnUserList">
+                        <li onClick={onClickLogout}>로그아웃</li>
+                     </ul>
+                  </HeaderStyle.UserBtnWrap>
+               </HeaderStyle.BtnWrap>
+            </HeaderStyle.Inner>
+         </HeaderStyle.Wrap>
+      </>
    );
 }
 

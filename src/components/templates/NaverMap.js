@@ -152,8 +152,9 @@ function NaverMap(props) {
             <PopupCenter title={`광센서 목록`} close={() => setOpenOptical(false)} leftText={"닫기"} leftFunc={() => setOpenOptical(false)}>
                <ListStyle.Wrap>
                   <ListStyle.Ul className="cScroll">
-                     {pipeDetail?.opticalList?.map((ele) => (
-                        <ListStyle.LI>{ele}</ListStyle.LI>
+                     {!pipeDetail?.opticalList && <div>데이터가 없습니다.</div>}
+                     {pipeDetail?.opticalList?.map((ele, index) => (
+                        <ListStyle.LI key={index}>{ele}</ListStyle.LI>
                      ))}
                   </ListStyle.Ul>
                </ListStyle.Wrap>
@@ -237,8 +238,6 @@ const Style = {
 export function DetailPopupChild({ pipeDetail, setOpenOptical }) {
    const { type = "-", material = "-", diameter = "-", length = "-", angle = "-", constDate, smartPipeNo = "-", waves = "-", optical = "-", acdc = "-", imgList = [] } = pipeDetail || {};
 
-   console.log(pipeDetail);
-
    const subTitle = (keyName) => {
       const item = keyWithKor.find(({ key }) => key === keyName);
       return <span>{item?.kor || "-"}</span>;
@@ -246,7 +245,6 @@ export function DetailPopupChild({ pipeDetail, setOpenOptical }) {
 
    const mainTarget = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL : "";
 
-   console.log(mainTarget);
    return (
       <>
          <Style.Wrap>
@@ -260,27 +258,6 @@ export function DetailPopupChild({ pipeDetail, setOpenOptical }) {
                      ))}
                   </MySwiper>
                ) : (
-                  //   <Swiper
-                  //       style={{
-                  //           '--swiper-navigation-color': '#fff',
-                  //           '--swiper-pagination-color': '#fff',
-                  //       }}
-                  //       className="imgSwiper"
-                  //       spaceBetween={10}
-                  //       // modules={[Navigation, Lazy, Pagination]}
-                  //       navigation={true}
-                  //       lazy={true}
-                  //       pagination={true}
-                  //   >
-                  //       {imgList.map((img, i) => (
-                  //           <SwiperSlide key={img.img + i}>
-                  //               <img
-                  //                   alt={`이미지 ${i}`}
-                  //                   src={`http://3.38.180.149/img${img.img}`}
-                  //               />
-                  //           </SwiperSlide>
-                  //       ))}
-                  //   </Swiper>
                   <p className="nullText"> 이미지가 없습니다.</p>
                )}
             </Style.ImgWrap>
